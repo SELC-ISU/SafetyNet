@@ -15,6 +15,7 @@
 		8498CCE6236E1A5C00F6E26B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8498CCE4236E1A5C00F6E26B /* LaunchScreen.storyboard */; };
 		8498CCEE236E210B00F6E26B /* ChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8498CCED236E210B00F6E26B /* ChatController.swift */; };
 		8498CCF0236E2F1F00F6E26B /* ChatRoomController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8498CCEF236E2F1F00F6E26B /* ChatRoomController.swift */; };
+		8498CCFC236E5EBB00F6E26B /* ChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8498CCFB236E5EBB00F6E26B /* ChatService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		8498CCE7236E1A5C00F6E26B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8498CCED236E210B00F6E26B /* ChatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatController.swift; sourceTree = "<group>"; };
 		8498CCEF236E2F1F00F6E26B /* ChatRoomController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomController.swift; sourceTree = "<group>"; };
+		8498CCFB236E5EBB00F6E26B /* ChatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatService.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 		8498CCD8236E1A5B00F6E26B /* Chat-Demo */ = {
 			isa = PBXGroup;
 			children = (
+				8498CCFB236E5EBB00F6E26B /* ChatService.swift */,
 				8498CCD9236E1A5B00F6E26B /* AppDelegate.swift */,
 				8498CCDB236E1A5B00F6E26B /* SceneDelegate.swift */,
 				8498CCDD236E1A5B00F6E26B /* ContentView.swift */,
@@ -157,6 +160,7 @@
 				8498CCDE236E1A5B00F6E26B /* ContentView.swift in Sources */,
 				8498CCEE236E210B00F6E26B /* ChatController.swift in Sources */,
 				8498CCF0236E2F1F00F6E26B /* ChatRoomController.swift in Sources */,
+				8498CCFC236E5EBB00F6E26B /* ChatService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

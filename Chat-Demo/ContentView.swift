@@ -3,10 +3,10 @@
 //  ContentView.swift
 //  SwiftUI Chat
 //
-//  Created by Nick Halavins on 6/7/19. Updated 10/11/19
-//  Copyright © 2019 AntiLand. All rights reserved.
 //
 import SwiftUI
+
+var all_message_ids: [Int] = []
 
 // let's create a structure that will represent each message in chat
 struct ChatMessage : Hashable {
@@ -14,12 +14,17 @@ struct ChatMessage : Hashable {
     var color: Color = Color.green
     var name: String
     var isMe: Bool = false
+    var room: String = "General Chatroom"
+    var messageID: Int
 }
 
-
-//struct ChatRoom : View {
-//
-//}
+struct Message: Codable {
+    let messageID: Int
+    let messageData: String
+    let name: String
+    let flag: String
+}
+// TODO: ADD CONNECTED DEVICES
 
 struct ChatRow : View {
     
@@ -58,6 +63,20 @@ struct ChatRow : View {
         }
     }
 }
+func generateMessageID() -> Int {
+    var id = 0
+    var contains = true;
+    
+    while(contains) {
+        id = Int.random(in: 0 ..< 100000)
+        contains = false
+        if(all_message_ids.contains(id)) {
+            contains = true
+        }
+    }
+    all_message_ids.append(id)
+    return id
+}
 
 struct ContentView : View {
     
@@ -65,6 +84,10 @@ struct ContentView : View {
     @State var composedMessage: String = ""
     @EnvironmentObject var chatController: ChatController
     @State var chatroom: String = "General Chatroom"
+    let hermes = Hermes()
+    
+    
+    
     
     var body: some View {
       
@@ -87,15 +110,27 @@ struct ContentView : View {
                     Text("Send")
                 }
             }.frame(minHeight: CGFloat(50)).padding()
+                .onAppear {self.hermes.delegate = self } 
         }
     }
     func sendMessage() {
-        chatController.sendMessage(ChatMessage(message: composedMessage, color: .green, name: "C", isMe: true))
-        composedMessage = ""
-    }
-    func changeChatroom(){
         print(chatroom)
+//        var Id = generateMessageID()
+        chatController.sendMessage(ChatMessage(message: composedMessage, name: "C", isMe: true, room: chatroom, messageID: generateMessageID()))
+
     }
+}
+
+extension ContentView : HermesDelegate {
+    func connectedDevicesChanged(manager: Hermes, connectedDevices: [String]) {
+    
+    }
+    
+    func sendMessage(manager: Hermes, colorString: String) {
+        chatController.receiveMessage(manager: manager, JSONMessage: colorString)
+    }
+    
+    
 }
 
 #if DEBUG
