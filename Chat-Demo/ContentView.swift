@@ -127,7 +127,7 @@ extension ContentView : HermesDelegate {
     }
     
     func sendMessage(manager: Hermes, colorString: String) {
-        chatController.receiveMessage(manager: manager, JSONMessage: colorString)
+        chatController.receiveMessage(manager: manager, JSONMessage: colorString, chatroom: chatroom)
     }
     
     
