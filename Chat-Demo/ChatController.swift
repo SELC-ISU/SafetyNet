@@ -10,8 +10,8 @@ class ChatController : ObservableObject{
     var i_love_warnings = ""
     
     @Published var messages = [
-        ChatMessage(message: "", name: "", messageID: generateMessageID() ),
-    ]
+        ChatMessage
+    ]()
     
     var stupid = [555]
     func sendMessage(_ chatMessage: ChatMessage){
@@ -25,7 +25,7 @@ class ChatController : ObservableObject{
         
         var json = "{\"messageID\":" + String(id)
         json += ", \"messageData\": \"" + encrypted_message! + "\""
-        json += ", \"name\": \"" + "CHANGEME" + "\""
+        json += ", \"name\": \"" + chatMessage.name + "\""
         json += ",\"flag\": \"" + encrypted_flag! + "\"}"
         
         print(json)
@@ -45,22 +45,18 @@ class ChatController : ObservableObject{
             let zeros = try? decryptMessage(encryptedMessage: message!.flag, encryptionKey: chatroom)
             
             
-            var my_chat_msg = ChatMessage(message: "", color: .gray, name: "A", isMe: false, messageID: message!.messageID)
+            var my_chat_msg = ChatMessage(message: "", color: .gray, name: message!.name, isMe: false, messageID: message!.messageID)
 //            if you have not already recieved the message, send it out again
             if(!self.contains(message: my_chat_msg) && !self.stupid.contains(message!.messageID)){
                 self.stupid.append(message!.messageID)
                 
                 
                 if(zeros == "00000"){
-                    my_chat_msg = ChatMessage(message: message_data!, color: .gray, name: "A", isMe: false, messageID: message!.messageID)
+                    my_chat_msg = ChatMessage(message: message_data!, color: .gray, name: message!.name, isMe: false, messageID: message!.messageID)
                     self.messages.append(my_chat_msg)
                 }
                 self.hermes.send(message: JSONMessage)
-                    
-                
             }
-
-            
         }
     }
     

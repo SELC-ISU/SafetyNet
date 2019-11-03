@@ -116,7 +116,7 @@ struct ContentView : View {
     func sendMessage() {
         print(chatroom)
 //        var Id = generateMessageID()
-        chatController.sendMessage(ChatMessage(message: composedMessage, name: "C", isMe: true, room: chatroom, messageID: generateMessageID()))
+        chatController.sendMessage(ChatMessage(message: composedMessage, name: UIDevice.current.name, isMe: true, room: chatroom, messageID: generateMessageID()))
 
     }
 }
