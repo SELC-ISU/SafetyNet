@@ -6,13 +6,18 @@ class ChatController : ObservableObject{
     var hasChanged = PassthroughSubject<Void, Never>()
     let hermes = Hermes()
     
+    var i_love_warnings = ""
+    
     @Published var messages = [
         ChatMessage(message: "", name: "", messageID: generateMessageID() ),
     ]
     
     var stupid = [555]
     func sendMessage(_ chatMessage: ChatMessage){
-        
+        if(chatMessage.room != i_love_warnings){
+            self.messages = []
+            i_love_warnings = chatMessage.room
+        }
         let id = generateMessageID()
         var X = try? encryptMessage(message: chatMessage.message, encryptionKey: chatMessage.room)
         var Y = try? encryptMessage(message: "00000", encryptionKey: chatMessage.room)
@@ -33,6 +38,7 @@ class ChatController : ObservableObject{
     
     func receiveMessage(manager: Hermes, JSONMessage: String, chatroom: String){
         OperationQueue.main.addOperation {
+            
             let message = self.decodeJSON(colorString: JSONMessage)
             let message_data = try? decryptMessage(encryptedMessage: message!.messageData, encryptionKey: chatroom)
             let zeros = try? decryptMessage(encryptedMessage: message!.flag, encryptionKey: chatroom)
